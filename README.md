@@ -1,6 +1,14 @@
-# mlops
+# MLOPS
 
 Este projeto tem o propósito de apresentar alguns padrões de um projeto de machine learning pronto para produção.
+
+### Informações gerais:
+- Base de dados utilizada: https://www.kaggle.com/datasets/sukhmandeepsinghbrar/housing-price-dataset
+- notebooks: "draft" do projeto
+- src : exemplo de código produtivo
+- assets : arquivo de configuração e pkl do modelo treinado
+- Dockerfile : Configurado para aplicar predição
+- workflow: Esteira para dockerhub
 
 O repositório possui a seguinte estrutura:
 
@@ -39,7 +47,7 @@ python -m venv env
 ```
 pip install -r requirements.txt
 ```
-4. Execute o make para o processo completp
+4. Execute o make para o processo completo
 ```
 make all
 ```

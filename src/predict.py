@@ -1,3 +1,10 @@
+"""
+Predict script following:
+- core configuration
+- pipeline data transformation
+- trained ml model
+"""
+
 import pandas as pd
 import pickle
 import logging

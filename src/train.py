@@ -1,9 +1,15 @@
+"""
+Train script following:
+- core configuration
+- pipeline data transformation
+"""
+
 import pandas as pd
 import numpy as np
 import pickle
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.metrics import r2_score
 from src.core import config, PACKAGE_ROOT, ASSETS_PATH
 from src.utils import validate_inputs
 from src.pipeline import df_model

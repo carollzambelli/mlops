@@ -1,3 +1,7 @@
+"""
+Pipeline of all data transformation needed to predict and train the model
+"""
+
 import pandas as pd
 from sklearn.pipeline import Pipeline
 from feature_engine.imputation import CategoricalImputer, MeanMedianImputer
@@ -58,6 +62,10 @@ price_pipe = Pipeline(
 )
 
 def df_model(df_raw):
+
+    """
+    Apply the pipeline and concat with scaler transformations
+    """
 
     df_scaler = pd.DataFrame(
         MinMaxScaler().fit_transform(df_raw[config.data_config.scale_vars]), 

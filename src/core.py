@@ -1,3 +1,7 @@
+"""
+Configuration of all relevant parameters to use in the project and data format validation
+"""
+
 from pathlib import Path
 from typing import Dict, List
 from pydantic import BaseModel
@@ -9,7 +13,8 @@ CONFIG_FILE_PATH = ASSETS_PATH / "config.yml"
 
 class ModelConfig(BaseModel):
     """
-    xxxxxl config.
+    All configuration relevant to model
+    training and feature engineering.
     """
     target: str
     features: List[str]
@@ -21,8 +26,8 @@ class ModelConfig(BaseModel):
 
 class DataConfig(BaseModel):
     """
-    All configuration relevant to model
-    training and feature engineering.
+    All configuration relevant to data
+    sanitization and transformer classes
     """
 
     input_data_train: List[str]
@@ -46,6 +51,9 @@ class Config(BaseModel):
     ml_config: ModelConfig
 
 class DataSchema(BaseModel):
+    """
+    Data Input schema
+    """
     bedrooms: int
     bathrooms: float
     sqft_living: int

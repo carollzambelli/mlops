@@ -1,3 +1,7 @@
+"""
+Transformes utils class to be used in pipeline and data schema validation
+"""
+
 from typing import List, Dict
 import pandas as pd
 import numpy as np
@@ -8,6 +12,7 @@ from src.core import config, MultipleDataSchema
 
 
 class DataTypeTransformer(BaseEstimator, TransformerMixin):
+    """Data type transformer."""
     def __init__(self, variables: List[str], data_type: str):
 
         if not isinstance(variables, list):
@@ -64,7 +69,7 @@ class TemporalVariableTransformer(BaseEstimator, TransformerMixin):
         return X
     
 class MapperTransformer(BaseEstimator, TransformerMixin):
-    """Categorical variable mapper."""
+    """Column namme variable mapper."""
 
     def __init__(self, variables: str):
 
@@ -85,7 +90,7 @@ class MapperTransformer(BaseEstimator, TransformerMixin):
         return X
     
 class RareCategoriesTransformer(BaseEstimator, TransformerMixin):
-    """Categorical variable mapper."""
+    """Rare categorical variable mapper."""
 
     def __init__(self, variables: str, rare_perc : float):
 
@@ -119,7 +124,7 @@ class RareCategoriesTransformer(BaseEstimator, TransformerMixin):
 
 
 def validate_inputs(raw_data: pd.DataFrame, step):
-    """Valida se o dado de entrada está no tipo adequado"""
+    """Validade columns and data type follow the model requirements """
 
     errors = None
     if step == "train":
