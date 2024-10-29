@@ -18,5 +18,5 @@ jobs:
         docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PWD
     - name: Build & Push Docker Image
       run: |
-        docker build . --file Dockerfile --tag data-quality:latest
-        docker push carolzkamada/mlops
+        docker build . --file Dockerfile --tag mlops:latest
+        docker push carolzkamada/mlops:latest
