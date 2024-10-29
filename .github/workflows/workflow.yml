@@ -1,0 +1,22 @@
+name: Build and Push python Image to AWS ECR to be used in lambda function
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-push:
+    name: push docker image to hub
+    runs-on: ubuntu-latest
+    steps:
+    - uses: docker/login-action@v3
+    - name: docker login
+      env :
+        DOCKERHUB_USERNAME: ${{secrets.DOCKERHUB_USERNAME}}
+        DOCKERHUB_PWD: ${{secrets.DOCKERHUB_PWD}}
+      run: |
+        docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PWD
+    - name: Build & Push Docker Image
+      run: |
+        docker build -t .
+        docker push carolzkamada/mlops:tagnamelatest
