@@ -1,4 +1,4 @@
-name: Build and Push python Image to AWS ECR to be used in lambda function
+name: Build and Push python Image to dockerhub
 
 on:
   push:
@@ -19,4 +19,4 @@ jobs:
     - name: Build & Push Docker Image
       run: |
         docker build . --file Dockerfile --tag data-quality:latest
-        docker push carolzkamada/mlops:tagnamelatest
+        docker push carolzkamada/mlops
