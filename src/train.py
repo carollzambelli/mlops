@@ -7,16 +7,19 @@ Train script following:
 import pandas as pd
 import numpy as np
 import pickle
+import logging
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import r2_score
+from datetime import datetime
 from src.core import config, PACKAGE_ROOT, ASSETS_PATH
 from src.utils import validate_inputs
 from src.pipeline import df_model
 
+logging.basicConfig(level=logging.INFO)
 
 def train():
-
+    logging.info("Iniciando treinamento")
     data = pd.read_csv(f'{PACKAGE_ROOT}/{config.ml_config.train_data_path}')
     validated_data, errors = validate_inputs(raw_data=data, step = "train")
 
@@ -35,13 +38,20 @@ def train():
         clf = RandomForestRegressor()
         clf.fit(X_train, y_train)
         y_pred = clf.predict(X_test)
-
-        if r2_score(y_test, y_pred) >= config.ml_config.r2_score_limit :
-            filename = f'{ASSETS_PATH}/{config.ml_config.trained_model_file}'
-            pickle.dump(clf, open(filename, 'wb'))
-            return True
-        else:
-            return False
+        score = r2_score(y_test, y_pred)
+        logging.info("Treinamento realizado")
+    else:
+        logging.error("Formato de dados")
+    
+    if  score >= config.ml_config.r2_score_limit :
+        dt = datetime.now().date()
+        filename = f'{config.ml_config.trained_model_file}_{dt}.pkl'
+        pickle.dump(clf, open(filename, 'wb'))
+        logging.info(f"Modelo {filename} salvo, com score {score}")
+        return True
+    else:
+        logging.info(f"Modelo {filename} score de {score}, abaixo do exigido")
+        return False
         
 if __name__ == '__main__':
     train()

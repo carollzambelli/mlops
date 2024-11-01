@@ -1,11 +1,22 @@
 export PYTHONPATH = ./
 
-run_train: 
+venv:
+	python -m venv venv 
+	venv\Scripts\activate && pip install -r requirements.txt
+
+venv_run: 
 	@echo "Running the model training..."
-	python src/train.py
-
-run_predict: 
+	venv\Scripts\activate && python src/train.py
 	@echo "Running the model predict..."
-	python src/predict.py 
+	venv\Scripts\activate && python src/predict.py 
 
-all: run_train run_predict
+venv_remove:
+	rmdir /S /Q venv
+
+docker-build-run:
+	docker build -t mlops .
+	docker run mlops
+
+all-run: venv venv_run venv_remove
+
+docker: docker-build-run

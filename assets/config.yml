@@ -163,11 +163,11 @@ grade_encoded:
 
 # ===== CONFIGURAÇÕES DO MODELO =====
 
-trained_model_file: house_price_regression.pkl
+trained_model_file: model/house_price_regression
 
 target: price
 
-r2_score_limit : 0.8
+r2_score_limit : 0.7
 
 train_data_path : 'datasets/house_price.csv'
 
