@@ -13,10 +13,16 @@ venv_run:
 venv_remove:
 	rmdir /S /Q venv
 
+run :
+	python src/train.py
+	python src/predict.py 
+	
 docker-build-run:
 	docker build -t mlops .
 	docker run mlops
 
 all-run: venv venv_run venv_remove
+
+run : 
 
 docker: docker-build-run
