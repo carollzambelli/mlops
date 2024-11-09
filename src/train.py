@@ -20,7 +20,7 @@ logging.basicConfig(level=logging.INFO)
 
 def train():
     logging.info("Iniciando treinamento")
-    data = pd.read_csv(f'{PACKAGE_ROOT}/{config.ml_config.train_data_path}')
+    data = pd.read_csv(f'{PACKAGE_ROOT}/{config.ml_config.train_data_path}', index_col=0)
     validated_data, errors = validate_inputs(raw_data=data, step = "train")
 
     if not errors:

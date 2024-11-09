@@ -38,6 +38,8 @@ O repositório possui a seguinte estrutura:
 
 ### Como utilizar:
 
+Download make (windows) : https://community.chocolatey.org/
+
 1. Crie um ambiente virtual
 ```
 python -m venv env

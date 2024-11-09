@@ -19,7 +19,7 @@ logging.basicConfig(level=logging.INFO)
 def make_prediction():
 
     logging.info("Iniciado processo de aplicação do modelo")
-    data = pd.read_csv(f'{PACKAGE_ROOT}/{config.ml_config.predict_data_path}')
+    data = pd.read_csv(f'{PACKAGE_ROOT}/{config.ml_config.predict_data_path}',index_col=0)
 
     model_folder = os.path.join(os.path.dirname(config.ml_config.trained_model_file), '*')
     models = sorted(
