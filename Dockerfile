@@ -10,4 +10,4 @@ RUN pip install -r requirements.txt
 
 ENV PYTHONPATH="./"
 
-CMD [ "python", "src/predict.py" ]
+CMD [ "python", "src/train.py" ]
