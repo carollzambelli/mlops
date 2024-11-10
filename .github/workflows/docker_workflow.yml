@@ -19,5 +19,7 @@ jobs:
     - name: Build & Push Docker Image
       run: |
         docker build . --file Dockerfile --tag carolzkamada/mlops:latest
-        docker push carolzkamada/mlops:latest
+      #docker push carolzkamada/mlops:latest
+    - name: Docker Run
+      run: |
         docker run carolzkamada/mlops:latest
