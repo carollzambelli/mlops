@@ -6,6 +6,7 @@ Train script following:
 
 import pandas as pd
 import numpy as np
+from pathlib import Path
 import pickle
 import logging
 from sklearn.model_selection import train_test_split
@@ -45,6 +46,7 @@ def train():
     
     if  score >= config.ml_config.r2_score_limit :
         dt = datetime.now().date()
+        logging.info(f"{Path().resolve()}")
         filename = f'{config.ml_config.trained_model_file}_{dt}.pkl'
         pickle.dump(clf, open(filename, 'wb'))
         logging.info(f"Modelo {filename} salvo, com score {score}")
