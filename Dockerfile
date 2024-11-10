@@ -8,6 +8,6 @@ COPY . /usr
 
 RUN pip install -r requirements.txt
 
-ENV PYTHONPATH="./"
+ENV PYTHONPATH="/usr"
 
 CMD [ "python", "src/train.py" ]
