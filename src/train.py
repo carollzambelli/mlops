@@ -46,7 +46,7 @@ def train():
     
     if  score >= config.ml_config.r2_score_limit :
         dt = datetime.now().date()
-        filename = f'{{PACKAGE_ROOT}/config.ml_config.trained_model_file}_{dt}.pkl'
+        filename = f'{PACKAGE_ROOT}/{config.ml_config.trained_model_file}_{dt}.pkl'
         pickle.dump(clf, open(filename, 'wb'))
         logging.info(f"Modelo {filename} salvo, com score {score}")
         return True
