@@ -9,6 +9,9 @@ Este projeto tem o propósito de apresentar alguns padrões de um projeto de mac
 - assets : arquivo de configuração e pkl do modelo treinado
 - Dockerfile : Configurado para aplicar predição
 - workflow: Esteira para dockerhub
+    - "exececution_workflow" testa a execução do script
+    - "docker_workflow" deploy da imagem no dockerhub e também realiza a sua execução
+
 
 O repositório possui a seguinte estrutura:
 
@@ -36,20 +39,13 @@ O repositório possui a seguinte estrutura:
 └───.gitignore
 ```
 
-### Como utilizar:
+### Como testar localmente:
 
-Download make (windows) : https://community.chocolatey.org/
-
-1. Crie um ambiente virtual
+1. Instale o tox
 ```
-python -m venv env
+pip install tox
 ```
-2. Ative o ambiente virtual
-3. Instale o requirements
+2. Execute o tox
 ```
-pip install -r requirements.txt
-```
-4. Execute o make para o processo completo
-```
-make all
+python -m tox
 ```
