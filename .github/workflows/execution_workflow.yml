@@ -1,4 +1,4 @@
-name: Test Code execution workflow
+name: Test Train & Test Code execution workflow
 
 on:
   push:
