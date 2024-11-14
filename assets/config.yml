@@ -163,7 +163,7 @@ grade_encoded:
 
 # ===== CONFIGURAÇÕES DO MODELO =====
 
-trained_model_file: model/house_price_regression
+trained_model_file: models/house_price_regression
 
 target: price
 
