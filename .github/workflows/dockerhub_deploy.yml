@@ -16,10 +16,10 @@ jobs:
         DOCKERHUB_PWD: ${{secrets.DOCKERHUB_PWD}}
       run: |
         docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PWD
-    - name: Build & Push Docker Image
+    - name: Build & Run
       run: |
         docker build . --file Dockerfile --tag carolzkamada/mlops:latest
-        docker push carolzkamada/mlops:latest
-    - name: Docker Run
-      run: |
         docker run carolzkamada/mlops:latest
+    - name: Push Docker Image
+      run: docker push carolzkamada/mlops:latest
+        

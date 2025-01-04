@@ -4,36 +4,33 @@ Este projeto tem o propósito de apresentar alguns padrões de um projeto de mac
 
 ### Informações gerais:
 - Base de dados utilizada: https://www.kaggle.com/datasets/sukhmandeepsinghbrar/housing-price-dataset
-- notebooks: "draft" do projeto
 - src : exemplo de código produtivo
-- assets : arquivo de configuração e pkl do modelo treinado
+- assets : arquivo yaml de configuração
+- models: pkl do modelo treinado
 - Dockerfile : Configurado para aplicar predição
 - workflow: Esteira para dockerhub
-    - "exececution_workflow" testa a execução do script
-    - "docker_workflow" deploy da imagem no dockerhub e também realiza a sua execução
-
+    - "dockerhub_deploy" build, execução deploy da imagem no dockerhub
 
 O repositório possui a seguinte estrutura:
 
 ```
 ├───.github/workflows
-    └───workflow.yml
+    └───dockerhub_deploy.yml
 ├───assets
     └───config.yml
-    └───model.pkl
 ├───datasets
     └───train.csv
     └───predict.csv
-└───notebook
-    └───training_model.ipynb
+├───models
+    └───model.pkl
 └───src
     └───core.py
     └───pipeline.py
     └───predict.py
     └───train.py
     └───utils.py
-└───Dockerfile
-└───Makefile
+└───Dockerfile  
+└───tox.ini
 └───requirements.txt
 └───README.md
 └───.gitignore
