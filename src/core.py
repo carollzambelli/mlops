@@ -1,5 +1,5 @@
 """
-Configuration of all relevant parameters to use in the project and data format validation
+teste Configuration of all relevant parameters to use in the project and data format validation
 """
 
 from pathlib import Path
