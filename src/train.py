@@ -9,13 +9,16 @@ import numpy as np
 from pathlib import Path
 import pickle
 import logging
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import r2_score
+from scipy.stats import loguniform   
+from sklearn.linear_model import Ridge
+from sklearn.model_selection import train_test_split, RandomizedSearchCV
+from sklearn.pipeline import Pipeline, FeatureUnion
+from sklearn.compose import ColumnTransformer 
+from sklearn.preprocessing import StandardScaler, OneHotEncoder 
+from sklearn.metrics import r2_score, root_mean_squared_error 
 from datetime import datetime
 from src.core import config, PACKAGE_ROOT, ASSETS_PATH
 from src.utils import validate_inputs
-from src.pipeline import df_model
 
 logging.basicConfig(level=logging.INFO)
 
@@ -25,33 +28,39 @@ def train():
     validated_data, errors = validate_inputs(raw_data=data, step = "train")
 
     if not errors:
-        _df = df_model(validated_data)
-        df = _df[config.ml_config.features + [config.ml_config.target]]
-        X_train, X_test, y_train, y_test = train_test_split(
-            df.drop([config.ml_config.target], axis=1), 
-            df[config.ml_config.target], 
-            test_size=0.20, 
-            random_state=0
-        )
-        y_train = np.log(y_train)
-        y_test = np.log(y_test)
 
-        clf = RandomForestRegressor()
-        clf.fit(X_train, y_train)
-        y_pred = clf.predict(X_test)
-        score = r2_score(y_test, y_pred)
-        logging.info("Treinamento realizado")
-    else:
-        logging.error("Formato de dados")
+        y = data[config.ml_config.target]
+        features = config.data_config.quali_variables + config.data_config.quanti_variables
+        X = data[features]
+
+        X_treino, X_teste, y_treino, y_teste = train_test_split(X, y,
+                                                        test_size=0.2,
+                                                        random_state=123)
+
+        preprocessador = ColumnTransformer(transformers=[
+        ("quanti", StandardScaler(), config.data_config.quanti_variables),
+        ("quali", OneHotEncoder(sparse_output=False, drop="first", handle_unknown='ignore'), config.data_config.quanli_variables )])
+
+        RD =  Pipeline([
+        ("preprocess", preprocessador),
+        ("linear regression", RandomizedSearchCV(estimator=Ridge(),
+                  param_distributions={'alpha': loguniform(1e-5, 1e1) },
+                  scoring='neg_root_mean_squared_log_error',
+                  cv=10) )])
+        
+        clf  = RD.fit(X_treino, y_treino)
+        y_hat = clf.predict(preprocessador.fit_transform(X_teste))
+        erro = root_mean_squared_error(y_teste, y_hat)
+
     
-    if  score >= config.ml_config.r2_score_limit :
+    if  erro <= config.ml_config.erro :
         dt = datetime.now().date()
-        filename = f'{PACKAGE_ROOT}/{config.ml_config.trained_model_file}_{dt}.pkl'
+        filename = f'{PACKAGE_ROOT}/{config.ml_config.trained_model_file}{dt}.pkl'
         pickle.dump(clf, open(filename, 'wb'))
-        logging.info(f"Modelo {filename} salvo, com score {score}")
+        logging.info(f"Modelo {filename} salvo, com score {erro}")
         return True
     else:
-        logging.info(f"Modelo {filename} score de {score}, abaixo do exigido")
+        logging.info(f"Modelo {filename} score de {erro}, abaixo do exigido")
         return False
         
 if __name__ == '__main__':

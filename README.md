@@ -3,10 +3,9 @@
 Este projeto tem o propósito de apresentar alguns padrões de um projeto de machine learning pronto para produção.
 
 ### Informações gerais:
-- Base de dados utilizada: https://www.kaggle.com/datasets/sukhmandeepsinghbrar/housing-price-dataset
+- datasets: dados de treino
 - src : exemplo de código produtivo
-- assets : arquivo yaml de configuração
-- models: pkl do modelo treinado
+- assets : arquivo yaml de configuração e pkl do modelo treinado
 - Dockerfile : Configurado para aplicar predição
 - workflow: Esteira para dockerhub
     - "dockerhub_deploy" build, execução deploy da imagem no dockerhub

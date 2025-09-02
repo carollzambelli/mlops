@@ -17,12 +17,11 @@ class ModelConfig(BaseModel):
     training and feature engineering.
     """
     target: str
-    features: List[str]
-    trained_model_file: str
+    trained_model_folder: str
     train_data_path : str
-    result_data_path : str
     predict_data_path : str
-    r2_score_limit : float
+    result_data_path : str
+    erro : float
 
 class DataConfig(BaseModel):
     """
@@ -30,19 +29,8 @@ class DataConfig(BaseModel):
     sanitization and transformer classes
     """
 
-    input_data_train: List[str]
-    input_data_pred: List[str]
-    categorical_variables: List[str]
-    numerical_variables: List[str]
-    map_variables : List[str]
-    rare_encode : List[str]
-    scale_vars : List[str]
-    temporal_vars : Dict[str, str]
-    zipcode_encoded : Dict[int, str]
-    view_encoded: Dict[int, str]
-    condition_encoded: Dict[int, str]
-    grade_encoded: Dict[int, str]
-
+    quanli_variables: List[str]
+    quanti_variables: List[str]
 
 class Config(BaseModel):
     """Master config object."""
@@ -50,30 +38,38 @@ class Config(BaseModel):
     data_config: DataConfig
     ml_config: ModelConfig
 
-class DataSchema(BaseModel):
+class TrainDataSchema(BaseModel):
     """
     Data Input schema
     """
-    bedrooms: int
-    bathrooms: float
-    sqft_living: int
-    sqft_lot: int
-    floors: float
-    waterfront: int
-    view: int
-    condition: int
-    grade: int
-    sqft_above: int
-    sqft_basement: int
-    yr_built: int
-    yr_renovated: int
-    zipcode: int
-    sqft_living15: int
-    sqft_lot15: int
+    IDADE_CLIENTE: int
+    RENDA_MENSAL_CLIENTE: float
+    BEHAVIOUR_SCORE_CLIENTE: float
+    QTD_TRANSACOES_3M: float
+    QTD_ITENS_3M: float
+    VALOR_GASTO_3M: float
+    TICKET_MEDIO_3M: float
+    FLAG_ELETRONICOS_3M: str
+    SATISFACAO_ULTIMA_COMPRA: str
 
+class PredDataSchema(BaseModel):
+    """
+    Pred Input schema
+    """
+    IDADE_CLIENTE: int
+    RENDA_MENSAL_CLIENTE: float
+    BEHAVIOUR_SCORE_CLIENTE: float
+    QTD_TRANSACOES_3M: float
+    QTD_ITENS_3M: float
+    VALOR_GASTO_3M: float
+    TICKET_MEDIO_3M: float
+    FLAG_ELETRONICOS_3M: str
+    SATISFACAO_ULTIMA_COMPRA: str
+    VALOR_GASTO_PROX_12M: float
 
 class MultipleDataSchema(BaseModel):
-    inputs: List[DataSchema]
+    train: List[TrainDataSchema]
+    pred: List[PredDataSchema]
 
 def create_and_validate_config(cfg_path = CONFIG_FILE_PATH) -> Config:
     """Run validation on config values."""

@@ -10,6 +10,7 @@ import pickle
 import logging
 import glob
 import os
+from datetime import datetime
 from src.core import config, PACKAGE_ROOT, ASSETS_PATH
 from src.utils import validate_inputs
 from src.pipeline import df_model
@@ -36,8 +37,9 @@ def make_prediction():
         predictions = load_model.predict(df[config.ml_config.features])
         logging.info(f"{len(predictions)} predições realizadas")
 
+    dt = datetime.now().date()
     pd.DataFrame(predictions).to_csv(
-        f'{PACKAGE_ROOT}/{config.ml_config.result_data_path}', index=False)
+        f'{PACKAGE_ROOT}/{config.ml_config.result_data_path}_{dt}.csv', index=False)
     
     logging.info("Predições salvas")
     return True
