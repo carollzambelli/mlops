@@ -13,12 +13,18 @@ quanti_variables:
 
 target: VALOR_GASTO_PROX_12M
 
-trained_model_file: assets/models/model_
+trained_model_file: models/trained/trained
+
+production_model_file: models/production/model.pkl
 
 train_data_path : 'datasets/Potencial_Novos_Clientes.txt'
 
-predict_data_path : 'datasets/Potencial_Novos_Clientes_pred.csv'
+predict_data_path : 'datasets/X_teste.csv'
 
 result_data_path : 'datasets/results'
 
-erro: 500
+erro: 1000
+
+models:
+  - LINEAR
+  - RIDGE

@@ -1,0 +1,2 @@
+INFO:root:2025-09-09 18:29:41.313415 - Iniciando treinamento
+INFO:root:2025-09-09 18:29:41.313415 - Modelo RIDGE - rmse:696.726665841587

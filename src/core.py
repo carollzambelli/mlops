@@ -17,10 +17,12 @@ class ModelConfig(BaseModel):
     training and feature engineering.
     """
     target: str
-    trained_model_folder: str
+    production_model_file: str
+    trained_model_file: str
     train_data_path : str
     predict_data_path : str
     result_data_path : str
+    models: List[str]
     erro : float
 
 class DataConfig(BaseModel):
@@ -29,7 +31,7 @@ class DataConfig(BaseModel):
     sanitization and transformer classes
     """
 
-    quanli_variables: List[str]
+    quali_variables: List[str]
     quanti_variables: List[str]
 
 class Config(BaseModel):
@@ -49,27 +51,11 @@ class TrainDataSchema(BaseModel):
     QTD_ITENS_3M: float
     VALOR_GASTO_3M: float
     TICKET_MEDIO_3M: float
-    FLAG_ELETRONICOS_3M: str
+    FLAG_ELETRONICOS_3M: int
     SATISFACAO_ULTIMA_COMPRA: str
-
-class PredDataSchema(BaseModel):
-    """
-    Pred Input schema
-    """
-    IDADE_CLIENTE: int
-    RENDA_MENSAL_CLIENTE: float
-    BEHAVIOUR_SCORE_CLIENTE: float
-    QTD_TRANSACOES_3M: float
-    QTD_ITENS_3M: float
-    VALOR_GASTO_3M: float
-    TICKET_MEDIO_3M: float
-    FLAG_ELETRONICOS_3M: str
-    SATISFACAO_ULTIMA_COMPRA: str
-    VALOR_GASTO_PROX_12M: float
 
 class MultipleDataSchema(BaseModel):
-    train: List[TrainDataSchema]
-    pred: List[PredDataSchema]
+    inputs: List[TrainDataSchema]
 
 def create_and_validate_config(cfg_path = CONFIG_FILE_PATH) -> Config:
     """Run validation on config values."""

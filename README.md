@@ -3,10 +3,10 @@
 Este projeto tem o propósito de apresentar alguns padrões de um projeto de machine learning pronto para produção.
 
 ### Informações gerais:
-- datasets: dados de treino
-- src : exemplo de código produtivo
-- assets : arquivo yaml de configuração e pkl do modelo treinado
-- Dockerfile : Configurado para aplicar predição
+- datasets: dados para treinamento e amostra tratada para predição
+- src : exemplo de código produtivo de treinamento
+- assets : arquivo yaml de configuração e pkl dos modelos treinados
+- Dockerfile : Configurado para aplicar treinamento
 - workflow: Esteira para dockerhub
     - "dockerhub_deploy" build, execução deploy da imagem no dockerhub
 
@@ -17,17 +17,17 @@ O repositório possui a seguinte estrutura:
     └───dockerhub_deploy.yml
 ├───assets
     └───config.yml
+    └───models
+        └───production
+        └───trained
 ├───datasets
-    └───train.csv
-    └───predict.csv
-├───models
-    └───model.pkl
+    └───Potencial_Novos_Clientes.txt (para treinamento)
+    └───X_teste.csv (para predição)
 └───src
     └───core.py
-    └───pipeline.py
-    └───predict.py
     └───train.py
     └───utils.py
+└───predict.ipnyb
 └───Dockerfile  
 └───tox.ini
 └───requirements.txt
@@ -37,6 +37,26 @@ O repositório possui a seguinte estrutura:
 
 ### Como testar localmente:
 
+1. Crie um ambiente virtual e faça a sua ativação
+```
+python -m venv env 
+source env/bin/activate  
+```
+2. Instale os requirements
+```
+pip install -r requirements.txt
+```
+3. Aponte o PYTHONPATH para a raiz do projeto
+```
+export PYTHONPATH=$PYTHONPATH:./
+```
+4. Execute a função de treinamento
+```
+python src/train.py 
+```
+
+OU FAÇA A EXECUÇÃO COM TOX
+
 1. Instale o tox
 ```
 pip install tox
@@ -45,3 +65,4 @@ pip install tox
 ```
 python -m tox
 ```
+
