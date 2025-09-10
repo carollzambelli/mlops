@@ -14,8 +14,10 @@ from src.utils import validate_inputs, train_pipe
 from datetime import datetime
 warnings.filterwarnings('ignore')
 
-logging.basicConfig(filename=f'{PACKAGE_ROOT}/datasets/logs/train_log.txt',
-                     level=logging.INFO)
+#logging.basicConfig(filename=f'{PACKAGE_ROOT}/datasets/logs/train_log.txt',
+#                     level=logging.INFO)
+
+logging.basicConfig(level=logging.INFO)
 
 def train():
     dt = datetime.now()
