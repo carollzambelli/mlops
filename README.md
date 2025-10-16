@@ -38,9 +38,17 @@ O repositório possui a seguinte estrutura:
 ### Como testar localmente:
 
 1. Crie um ambiente virtual e faça a sua ativação
+
+Mac ou Linux
 ```
 python -m venv env 
 source env/bin/activate  
+```
+Windows
+```
+python -m venv env 
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+.\venv\Scripts\Activate.ps1 
 ```
 2. Instale os requirements
 ```
