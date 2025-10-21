@@ -15,7 +15,7 @@ from datetime import datetime
 warnings.filterwarnings('ignore')
 
 #logging.basicConfig(filename=f'{PACKAGE_ROOT}/datasets/logs/train_log.txt',
-#                     level=logging.INFO)
+#                    level=logging.INFO)
 
 logging.basicConfig(level=logging.INFO)
 

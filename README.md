@@ -42,13 +42,12 @@ O repositório possui a seguinte estrutura:
 Mac ou Linux
 ```
 python -m venv env 
-source env/bin/activate  
-```
-Windows
-```
+source env/bin/activate
+
+## For Windows
 python -m venv env 
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-.\venv\Scripts\Activate.ps1 
+.\env\Scripts\Activate.ps1 
 ```
 2. Instale os requirements
 ```
@@ -57,6 +56,9 @@ pip install -r requirements.txt
 3. Aponte o PYTHONPATH para a raiz do projeto
 ```
 export PYTHONPATH=$PYTHONPATH:./
+
+## For Windows
+$env:PYTHONPATH = "$env:PYTHONPATH;$(Get-Location)"
 ```
 4. Execute a função de treinamento
 ```
