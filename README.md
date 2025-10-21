@@ -76,3 +76,8 @@ pip install tox
 python -m tox
 ```
 
+EXECUÇÃO DO CONTAINER
+```
+docker pull  carolzkamada/mlops:latest
+docker run carolzkamada/mlops:latest 
+```
